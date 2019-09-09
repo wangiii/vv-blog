@@ -12,7 +12,7 @@ class ArticlesController extends Controller
         $articles = Article::query()
             ->with('tags')
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->paginate(6);
 
         return view('articles.index', compact('articles'));
     }

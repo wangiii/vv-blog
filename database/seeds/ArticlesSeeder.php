@@ -16,6 +16,7 @@ class ArticlesSeeder extends Seeder
 
         factory(\App\Models\Article::class, 10)->create()->each(function ($article) use($faker, $tags){
             $article->tags()->attach($faker->randomElement($tags));
+            $article->tags()->attach($faker->randomElement($tags));
         });
     }
 }

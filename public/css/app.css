@@ -10649,6 +10649,18 @@ body {
   font-size: 14px;
 }
 
+/* Sticky footer styles */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px;
+}
+
 .navbar-static-top {
   border-color: #e7e7e7;
   background-color: #fff;

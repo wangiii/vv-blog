@@ -14,3 +14,5 @@
 Auth::routes();
 
 Route::get('/', 'PagesController@index')->name('root');
+Route::get('/articles', 'ArticlesController@index')->name('articles');
+Route::get('/article/{id}', 'ArticlesController@show')->name('article');

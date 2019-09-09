@@ -18,6 +18,7 @@ use Faker\Generator as Faker;
 $factory->define(Article::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
+        'describe' => $faker->sentence,
         'content' => $faker->paragraph,
     ];
 });

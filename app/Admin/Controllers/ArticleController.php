@@ -28,6 +28,8 @@ class ArticleController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Article);
+
+        $grid->column('id', 'ID');
         $grid->column('title', '标题');
         $grid->column('describe', '简介');
 //        $grid->column('content', '内容');

@@ -2,21 +2,21 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Category;
+use App\Models\Tag;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class CategoryController extends AdminController
+class TagController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'App\Models\Category';
+    protected $title = 'App\Models\Tag';
 
     /**
      * Make a grid builder.
@@ -25,10 +25,10 @@ class CategoryController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Category);
+        $grid = new Grid(new Tag);
 
         $grid->column('id', 'ID');
-        $grid->column('name', '分类名称');
+        $grid->column('name', '标签');
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
 
@@ -43,10 +43,10 @@ class CategoryController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Category::findOrFail($id));
+        $show = new Show(Tag::findOrFail($id));
 
         $show->field('id', 'ID');
-        $show->field('name', '类型名称');
+        $show->field('name', '标签名称');
         $show->field('created_at', '创建时间');
         $show->field('updated_at', '更新时间');
 
@@ -60,10 +60,10 @@ class CategoryController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Category);
+        $form = new Form(new Tag);
 
         $form->display('id', 'ID');
-        $form->text('name', '类型名称');
+        $form->text('name', '标签名称');
 
         $form->footer(function ($footer) {
             $footer->disableEditingCheck();
@@ -74,24 +74,24 @@ class CategoryController extends AdminController
         return $form;
     }
 
+    public function index(Content $content)
+    {
+        return $content
+            ->header('标签列表')
+            ->body($this->grid());
+    }
+
     public function edit($id, Content $content)
     {
         return $content
-            ->header('编辑类型')
+            ->header('标签类型')
             ->body($this->form()->edit($id));
     }
 
     public function show($id, Content $content)
     {
         return $content
-            ->header("类型详情")
+            ->header("标签详情")
             ->body($this->detail($id));
-    }
-
-    public function index(Content $content)
-    {
-        return $content
-            ->header('类型列表')
-            ->body($this->grid());
     }
 }

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h1>标签</h1>
         <li>
             @foreach($tags as $tag)
                 <ul>

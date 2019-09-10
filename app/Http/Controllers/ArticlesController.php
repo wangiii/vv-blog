@@ -10,9 +10,9 @@ class ArticlesController extends Controller
     public function index(Request $request)
     {
         $articles = Article::query()
-            ->with('tags')
+            ->with('tags', 'category')
             ->orderBy('created_at', 'desc')
-            ->paginate(6);
+            ->paginate(7);
 
         return view('articles.index', compact('articles'));
     }
@@ -20,7 +20,7 @@ class ArticlesController extends Controller
     public function show(Request $request)
     {
         $article = Article::query()
-            ->with('tags')
+            ->with('tags', 'category')
             ->where('id', '=', $request->id)
             ->firstOrFail();
 

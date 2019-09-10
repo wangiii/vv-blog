@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Models\Article;
+use App\Models\Category;
 use Faker\Generator as Faker;
 
 /*
@@ -16,9 +17,11 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Article::class, function (Faker $faker) {
+    $categorys = Category::all();
     return [
         'title' => $faker->sentence,
         'describe' => $faker->sentence,
         'content' => $faker->paragraph,
+        'category_id' => $faker->randomElement($categorys)->id,
     ];
 });

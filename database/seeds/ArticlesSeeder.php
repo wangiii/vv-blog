@@ -12,9 +12,10 @@ class ArticlesSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        $tags = App\Models\Tag::all();
+        $tags = factory(\App\Models\Tag::class, 10)->create();
+        factory(\App\Models\Category::class, 5)->create();
 
-        factory(\App\Models\Article::class, 10)->create()->each(function ($article) use($faker, $tags){
+        factory(\App\Models\Article::class, 20)->create()->each(function ($article) use($faker, $tags){
             $article->tags()->attach($faker->randomElement($tags));
             $article->tags()->attach($faker->randomElement($tags));
         });

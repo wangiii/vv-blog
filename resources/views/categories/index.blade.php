@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
         <li>
-            @foreach($tags as $tag)
+            <hr>
+            @foreach($categories as $category)
                 <ul>
-                    <a href="{{ route('tag', ['id' => $tag->id]) }}"> #{{ $tag->name }}</a>
+                    <a href="{{ route('category', ['id' => $category->id]) }}"> &{{ $category->name }}</a>
                 </ul>
                 <hr>
             @endforeach
         </li>
     </div>
 @endsection
-

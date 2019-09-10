@@ -9,8 +9,9 @@
                 @foreach($article->tags as $tag)
                     <a href="{{ route('tag', ['id' => $tag->id]) }}">#{{ $tag->name }}</a>
                 @endforeach
-                / {{ $article->updated_at }}</p>
-            <br>
+                <a href="{{ route('category', ['id' => $article->category->id]) }}">&{{ $article->category->name }}</a>
+                / {{ $article->created_at }}</p>
+            <hr>
         @endforeach
     </div>
     {{ $articles->links() }}

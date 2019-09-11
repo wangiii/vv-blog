@@ -22,7 +22,7 @@
                     <ul class="list-group" style="margin-top: 5px">
                         @foreach($categories as $category)
                             <li class="list-group-item">
-                                <a href="{{ route('category', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                <a href="{{ route('category', ['id' => $category->id]) }}" class="text-decoration-none">{{ $category->name }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -34,7 +34,7 @@
                     <ul class="list-group" style="margin-top: 5px">
                         @foreach($tags as $tag)
                             <li class="list-group-item">
-                                <a href="{{ route('tag', ['id' => $tag->id]) }}">{{ $tag->name }}</a>
+                                <a href="{{ route('tag', ['id' => $tag->id]) }}" class="text-decoration-none">{{ $tag->name }}</a>
                             </li>
                         @endforeach
                     </ul>

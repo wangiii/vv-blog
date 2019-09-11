@@ -10674,3 +10674,7 @@ body {
   margin-bottom: 20px;
 }
 
+.card-body {
+  padding-bottom: 0px;
+}
+

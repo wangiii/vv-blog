@@ -14,7 +14,8 @@ class PagesController extends Controller
         $articles = Article::query()
             ->with('tags', 'category')
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->paginate(8);
+
         $tags = Tag::all();
         $categories = Category::all();
 

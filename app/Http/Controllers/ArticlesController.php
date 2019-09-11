@@ -3,20 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
-    public function index(Request $request)
-    {
-        $articles = Article::query()
-            ->with('tags', 'category')
-            ->orderBy('created_at', 'desc')
-            ->paginate();
-
-        return view('articles.index', compact('articles'));
-    }
-
     public function show(Request $request)
     {
         $article = Article::query()
@@ -24,6 +16,9 @@ class ArticlesController extends Controller
             ->where('id', '=', $request->id)
             ->firstOrFail();
 
-        return view('articles.show', compact('article'));
+        $tags = Tag::all();
+        $categories = Category::all();
+
+        return view('articles.show', compact(['article', 'tags', 'categories']));
     }
 }

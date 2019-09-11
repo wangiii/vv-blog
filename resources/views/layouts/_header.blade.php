@@ -1,16 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
-    <div class="container">
-        <!-- Branding Image -->
-        <a class="navbar-brand " href="{{ url('/') }}">
-            vv-blog
-        </a>
-
-        <div>
-            <ul class="navbar-nav navbar-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles') }}">所有文章</a>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar navbar-dark bg-dark topBar">
+    <div class="container d-flex justify-content-between">
+        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}"><strong>vv-blog</strong></a>
     </div>
 </nav>

@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages/root');
+        $articles = Article::query()
+            ->with('tags', 'category')
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+
+        return view('pages/root', compact('articles'));
     }
 }

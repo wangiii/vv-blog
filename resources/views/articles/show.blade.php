@@ -14,7 +14,9 @@
             &nbsp;
             {{ $article->created_at->diffForHumans() }}
         </p>
-        <p>{{ $article->content }}</p>
+        <div class="markdown" >
+            {!! $mdContent !!}
+        </div>
         <br>
     </div>
 @endsection

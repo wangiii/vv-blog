@@ -4,9 +4,18 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import "./markdown.scss";
+
 html {
     position: relative;
     min-height: 100%;
+    img {
+        max-width: 100% !important;
+    }
+}
+
+div.fixPadding {
+    padding: 0;
 }
 
 body {

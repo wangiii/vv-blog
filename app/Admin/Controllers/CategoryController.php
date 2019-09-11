@@ -46,7 +46,7 @@ class CategoryController extends AdminController
         $show = new Show(Category::findOrFail($id));
 
         $show->field('id', 'ID');
-        $show->field('name', '类型名称');
+        $show->field('name', '分类名称');
         $show->field('created_at', '创建时间');
         $show->field('updated_at', '更新时间');
 
@@ -63,7 +63,7 @@ class CategoryController extends AdminController
         $form = new Form(new Category);
 
         $form->display('id', 'ID');
-        $form->text('name', '类型名称');
+        $form->text('name', '分类名称');
 
         $form->footer(function ($footer) {
             $footer->disableEditingCheck();
@@ -77,21 +77,21 @@ class CategoryController extends AdminController
     public function edit($id, Content $content)
     {
         return $content
-            ->header('编辑类型')
+            ->header('修改分类')
             ->body($this->form()->edit($id));
     }
 
     public function show($id, Content $content)
     {
         return $content
-            ->header("类型详情")
+            ->header("查看分类")
             ->body($this->detail($id));
     }
 
     public function index(Content $content)
     {
         return $content
-            ->header('类型列表')
+            ->header('分类管理')
             ->body($this->grid());
     }
 }

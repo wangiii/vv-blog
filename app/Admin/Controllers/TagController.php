@@ -77,21 +77,21 @@ class TagController extends AdminController
     public function index(Content $content)
     {
         return $content
-            ->header('标签列表')
+            ->header('标签管理')
             ->body($this->grid());
     }
 
     public function edit($id, Content $content)
     {
         return $content
-            ->header('标签类型')
+            ->header('修改标签')
             ->body($this->form()->edit($id));
     }
 
     public function show($id, Content $content)
     {
         return $content
-            ->header("标签详情")
+            ->header("查看标签")
             ->body($this->detail($id));
     }
 }

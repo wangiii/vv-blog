@@ -32,12 +32,12 @@ class ArticleController extends AdminController
         $grid->column('id', 'ID');
         $grid->column('title', '标题');
         $grid->column('describe', '简介');
-//        $grid->column('content', '内容');
-        $grid->column('created_at', '创建时间');
-        $grid->column('updated_at', '更新时间');
         $grid->column('category_id', '分类')->display(function () {
             return $this->category->name;
         });
+//        $grid->column('content', '内容');
+        $grid->column('created_at', '创建时间');
+        $grid->column('updated_at', '更新时间');
 
         return $grid;
     }
@@ -56,12 +56,12 @@ class ArticleController extends AdminController
         $show->field('id', 'ID');
         $show->field('title', '标题');
         $show->field('describe', '简介');
-        $show->field('content', '正文');
-        $show->field('created_at', '创建时间');
-        $show->field('updated_at', '更新时间');
         $show->field('category_id', '分类')->as(function () {
             return $this->category->name;
         });
+        $show->field('content', '正文');
+        $show->field('created_at', '创建时间');
+        $show->field('updated_at', '更新时间');
 
         return $show;
     }
@@ -78,10 +78,10 @@ class ArticleController extends AdminController
         $form->display('id', 'ID');
         $form->text('title', '标题');
         $form->text('describe', '简介');
-        $form->textarea('content', '内容');
         $form->select('category_id', '分类')
             ->options(Category::all()->pluck('name', 'id'))
             ->rules('required');
+        $form->textarea('content', '内容');
 
         $form->footer(function ($footer) {
             $footer->disableEditingCheck();
@@ -95,14 +95,14 @@ class ArticleController extends AdminController
     public function index(Content $content)
     {
         return $content
-            ->header('文章列表')
+            ->header('文章管理')
             ->body($this->grid());
     }
 
     public function edit($id, Content $content)
     {
         return $content
-            ->header('文章')
+            ->header('修改文章')
             ->body($this->form()->edit($id));
     }
 
@@ -116,7 +116,7 @@ class ArticleController extends AdminController
     public function show($id, Content $content)
     {
         return $content
-            ->header("文章详情")
+            ->header("查看文章")
             ->body($this->detail($id));
     }
 }

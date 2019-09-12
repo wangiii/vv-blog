@@ -94,4 +94,11 @@ class TagController extends AdminController
             ->header("查看标签")
             ->body($this->detail($id));
     }
+
+    public function create(Content $content)
+    {
+        return $content
+            ->header('创建标签')
+            ->body($this->form());
+    }
 }

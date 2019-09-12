@@ -94,4 +94,11 @@ class CategoryController extends AdminController
             ->header('分类管理')
             ->body($this->grid());
     }
+
+    public function create(Content $content)
+    {
+        return $content
+            ->header('创建分类')
+            ->body($this->form());
+    }
 }

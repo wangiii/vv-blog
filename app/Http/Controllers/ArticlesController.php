@@ -12,9 +12,9 @@ class ArticlesController extends Controller
 {
     protected $markdownParser;
 
-    public function __construct()
+    public function __construct(Parsedown $parser)
     {
-        $this->markdownParser = new Parsedown();
+        $this->markdownParser = $parser;
     }
 
     public function show(Request $request)

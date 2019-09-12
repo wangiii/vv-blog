@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ $category->name }} | 分类
+@endsection
 
 @section('content')
     <div class="container">

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ $tag->name }} | 标签
+@endsection
 
 @section('content')
     <div class="container">

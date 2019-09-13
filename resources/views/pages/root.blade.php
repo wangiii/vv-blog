@@ -24,7 +24,7 @@
                         <span class="float-lg-right" style="color: darkgray">{{ $article->created_at->diffForHumans() }}</span>
                     </div>
                 </div>
-                <p>
+                <p style="color: #7e7e7e">
                     {{ $article->describe }}
                 </p>
             </div>

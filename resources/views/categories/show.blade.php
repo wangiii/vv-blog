@@ -12,7 +12,7 @@
                     {{ $category->name }}
                 </h3>
             </div>
-            <div class="list-group" style="margin-top: 5px">
+            <div class="list-group">
                 @foreach($category->articles as $article)
                     <a href="{{ route('article', ['id' => $article->id]) }}" }} class="list-group-item list-group-item-action" style="color: darkgray">
                         {{ $article->title }}

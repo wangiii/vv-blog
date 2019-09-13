@@ -12,7 +12,7 @@
                     {{ $tag->name }}
                 </h3>
             </div>
-            <ul class="list-group list-group-flush">
+            <div class="list-group">
                 @foreach($tag->articles as $article)
                     <a href="{{ route('article', ['id' => $article->id]) }}" }} class="list-group-item list-group-item-action" style="color: darkgray">
                         {{ $article->title }}
@@ -22,7 +22,7 @@
                         </span>
                     </a>
                 @endforeach
-            </ul>
+            </div>
         </div>
         <br>
     </div>

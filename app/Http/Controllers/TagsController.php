@@ -10,12 +10,12 @@ class TagsController extends Controller
 {
     public function show(Request $request)
     {
-        $tag = Tag::query()
-        ->where('id', '=', $request->id)
-        ->firstOrFail();
-
         $tags = Tag::all();
         $categories = Category::all();
+
+        $tag = Tag::where('id', $request->id)->with(['articles' => function($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->firstOrFail();
 
         return view('tags.show', compact(['tag', 'tags', 'categories']));
     }

@@ -10,9 +10,12 @@ class CategoriesController extends Controller
 {
     public function show(Request $request)
     {
-        $category = Category::query()->where('id', '=', $request->id)->firstOrFail();
         $tags = Tag::all();
         $categories = Category::all();
+
+        $category = Category::where('id', $request->id)->with(['articles' => function($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->firstOrFail();
 
         return view('categories.show', compact(['category', 'tags', 'categories']));
     }

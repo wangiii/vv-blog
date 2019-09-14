@@ -9,15 +9,6 @@
     <meta name="keywords" content="blog" />
     <title>@yield('title', 'vv-blog')</title>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?f06979147531b514668a5211fae26847";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
 </head>
 <body>
 <div id="app" class="{{ route_class() }}-page">

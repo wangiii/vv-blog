@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Parsedown;
 
 class Article extends Model
 {
@@ -19,5 +20,12 @@ class Article extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getContent()
+    {
+        $parser = new Parsedown();
+        $convertedHtml = $parser->text($this->content);
+        return $convertedHtml;
     }
 }

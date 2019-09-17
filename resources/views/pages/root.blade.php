@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    JasonVV 「 Blog 」
+    JasonVV 「 BLOG 」
 @endsection
 
 @section('content')

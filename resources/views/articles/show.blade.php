@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{ $article->title }} | JasonVV 「 Blog 」
+    {{ $article->title }} | JasonVV 「 BLOG 」
 @endsection
 
 @section('content')

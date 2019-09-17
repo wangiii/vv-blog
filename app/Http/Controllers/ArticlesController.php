@@ -2,39 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
-use Parsedown;
 
 class ArticlesController extends Controller
 {
-    protected $markdownParser;
+    private $articleRepository;
 
-    public function __construct(Parsedown $parser)
+    public function __construct(ArticleRepository $articleRepository)
     {
-        $this->markdownParser = $parser;
+        $this->articleRepository = $articleRepository;
     }
 
     public function show(Request $request)
     {
-        $article = Article::query()
-            ->with('tags', 'category')
-            ->where('id', '=', $request->id)
-            ->firstOrFail();
-
+        $article = $this->articleRepository->one($request->id);
+        $content = $this->articleRepository->convertMarkdownToHtml($article->content);
         $tags = Tag::all();
         $categories = Category::all();
 
-        $mdContent = $this->convertMarkdownToHtml($article->content);
-
-        return view('articles.show', compact(['article', 'tags', 'categories', 'mdContent']));
-    }
-
-    public function convertMarkdownToHtml($markdown)
-    {
-        $convertedHtml = $this->markdownParser->text($markdown);
-        return $convertedHtml;
+        return view('articles.show', compact(['article', 'tags', 'categories', 'content']));
     }
 }

@@ -20,7 +20,7 @@
             <span style="color: darkgray; display: inline-block">{{ $article->created_at->diffForHumans() }}</span>
         </p>
         <div class="markdown" >
-            {!! $mdContent !!}
+            {!! $content !!}
         </div>
         <br>
     </div>

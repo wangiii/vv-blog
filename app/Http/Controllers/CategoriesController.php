@@ -18,7 +18,7 @@ class CategoriesController extends Controller
 
     public function show(Request $request)
     {
-        $category = $this->categoryRepository->one($request->id);
+        $category = $this->categoryRepository->findById($request->id);
         $categories = Category::all();
         $tags = Tag::all();
 

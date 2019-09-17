@@ -14,7 +14,7 @@ class ArticleRepository
         $this->parser = $parser;
     }
 
-    public function one($id)
+    public function findById($id)
     {
         return Article::query()
             ->with('tags', 'category')

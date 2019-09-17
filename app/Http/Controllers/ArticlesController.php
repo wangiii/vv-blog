@@ -18,7 +18,7 @@ class ArticlesController extends Controller
 
     public function show(Request $request)
     {
-        $article = $this->articleRepository->one($request->id);
+        $article = $this->articleRepository->findById($request->id);
         $content = $this->articleRepository->convertMarkdownToHtml($article->content);
         $tags = Tag::all();
         $categories = Category::all();

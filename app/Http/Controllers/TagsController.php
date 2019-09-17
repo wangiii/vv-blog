@@ -18,7 +18,7 @@ class TagsController extends Controller
 
     public function show(Request $request)
     {
-        $tag = $this->tagRepository->one($request->id);
+        $tag = $this->tagRepository->findById($request->id);
         $tags = Tag::all();
         $categories = Category::all();
 

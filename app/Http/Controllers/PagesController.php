@@ -18,7 +18,7 @@ class PagesController extends Controller
 
     public function index(Request $request)
     {
-        $articles = $this->articleRepository->paginate(8);
+        $articles = $this->articleRepository->paginate(10);
         $tags = Tag::all();
         $categories = Category::all();
 

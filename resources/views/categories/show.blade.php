@@ -13,7 +13,7 @@
                 </h3>
             </div>
             <div class="list-group">
-                @foreach($category->articles as $article)
+                @forelse($category->articles as $article)
                     <a href="{{ route('article', ['id' => $article->id]) }}" }} class="list-group-item list-group-item-action" style="color: darkgray">
                         {{ $article->title }}
                         <span class="float-lg-right" style="color: darkgray; display: inline-block">
@@ -21,7 +21,15 @@
                             {{ $article->created_at->toDateString() }}
                         </span>
                     </a>
-                @endforeach
+                @empty
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <p style="color: #6e6e6e">!!!!!！「 {{ $category->name }} 」空空如也</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
         <br>

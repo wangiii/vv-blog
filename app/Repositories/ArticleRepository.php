@@ -17,6 +17,7 @@ class ArticleRepository
     public function paginate($perPage)
     {
         return Article::query()
+            ->where('category_id', '!=', 3)
             ->with('tags', 'category')
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);

@@ -25,7 +25,7 @@ class Article extends Model
     public function getContent()
     {
         $parser = new Parsedown();
-        $convertedHtml = $parser->text($this->content);
-        return $convertedHtml;
+        $convert2Html = $parser->text($this->content);
+        return $convert2Html;
     }
 }

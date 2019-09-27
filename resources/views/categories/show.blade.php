@@ -13,7 +13,7 @@
                 </h3>
             </div>
             <div class="list-group">
-                @forelse($category->articles as $article)
+                @forelse($articles as $article)
                     <a href="{{ route('article', ['id' => $article->id]) }}" }} class="list-group-item list-group-item-action" style="color: darkgray">
                         {{ $article->title }}
                         <span class="float-lg-right" style="color: darkgray; display: inline-block">
@@ -33,5 +33,6 @@
             </div>
         </div>
         <br>
+        {{ $articles->links() }}
     </div>
 @endsection

@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tag;
-use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    private $articleRepository;
-
-    public function __construct(ArticleRepository $articleRepository)
-    {
-        $this->articleRepository = $articleRepository;
-    }
-
     public function index(Request $request)
     {
-        $articles = $this->articleRepository->paginate(10);
+        $articles = Article::query()
+            ->where('category_id', '!=', 3)
+            ->with('tags', 'category')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         $tags = Tag::all();
         $categories = Category::all();
 

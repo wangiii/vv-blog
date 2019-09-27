@@ -11,7 +11,11 @@ class CategoriesController extends Controller
     public function show(Request $request)
     {
         $category = Category::where('id', $request->id)->firstOrFail();
-        $articles = $category->articles()->paginate(20);
+
+        $articles = $category->articles()
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
         $categories = Category::all();
         $tags = Tag::all();
 

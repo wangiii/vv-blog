@@ -11,7 +11,11 @@ class TagsController extends Controller
     public function show(Request $request)
     {
         $tag = Tag::where('id', $request->id)->firstOrFail();
-        $articles = $tag->articles()->paginate(20);;
+
+        $articles = $tag->articles()
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
         $tags = Tag::all();
         $categories = Category::all();
 

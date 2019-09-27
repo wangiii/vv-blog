@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container">
-        @foreach($articles as $article)
+        @forelse($articles as $article)
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
@@ -29,8 +29,17 @@
                 </p>
             </div>
         </div>
+        <br>
+        @empty
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <p style="color: #6e6e6e">!!!!!！「 此页 」空空如也</p>
+                    </div>
+                </div>
+            </div>
             <br>
-        @endforeach
+        @endforelse
         {{ $articles->links() }}
     </div>
 @endsection

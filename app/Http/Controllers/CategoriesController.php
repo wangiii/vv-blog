@@ -12,6 +12,8 @@ class CategoriesController extends Controller
     {
         $category = Category::where('id', $request->id)->firstOrFail();
 
+        $count = $category->articles->count();
+
         $articles = $category->articles()
             ->orderBy('created_at', 'desc')
             ->paginate(12);
@@ -19,6 +21,6 @@ class CategoriesController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        return view('categories.show', compact(['category', 'articles', 'tags', 'categories']));
+        return view('categories.show', compact(['category', 'articles', 'count', 'tags', 'categories']));
     }
 }

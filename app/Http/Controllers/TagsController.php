@@ -12,6 +12,8 @@ class TagsController extends Controller
     {
         $tag = Tag::where('id', $request->id)->firstOrFail();
 
+        $count = $tag->articles->count();
+
         $articles = $tag->articles()
             ->orderBy('created_at', 'desc')
             ->paginate(12);
@@ -19,6 +21,6 @@ class TagsController extends Controller
         $tags = Tag::all();
         $categories = Category::all();
 
-        return view('tags.show', compact(['tag', 'articles', 'tags', 'categories']));
+        return view('tags.show', compact(['tag', 'articles', 'count', 'tags', 'categories']));
     }
 }

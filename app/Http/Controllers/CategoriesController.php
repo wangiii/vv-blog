@@ -14,7 +14,7 @@ class CategoriesController extends Controller
 
         $articles = $category->articles()
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(12);
 
         $categories = Category::all();
         $tags = Tag::all();

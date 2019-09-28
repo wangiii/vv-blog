@@ -26,7 +26,7 @@ class TagController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Tag);
-
+        $grid->model()->orderBy('created_at', 'desc');
         $grid->column('id', 'ID');
         $grid->column('name', '标签');
         $grid->column('created_at', '创建时间');

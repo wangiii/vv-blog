@@ -26,7 +26,7 @@ class CategoryController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Category);
-
+        $grid->model()->orderBy('created_at', 'desc');
         $grid->column('id', 'ID');
         $grid->column('name', '分类名称');
         $grid->column('created_at', '创建时间');

@@ -34,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">
-                        <p style="color: #6e6e6e">!!!!!！「 此页 」空空如也</p>
+                        <p style="color: #6e6e6e">!!!!!！「 你有点调皮喔 」</p>
                     </div>
                 </div>
             </div>

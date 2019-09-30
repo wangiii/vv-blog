@@ -11,13 +11,14 @@ class ArticlesController extends Controller
 {
     public function show(Request $request)
     {
-        $article = Article::where('id', $request->id)
-            ->with('tags', 'category')
-            ->firstOrFail();
+        $article = Article::with('tags', 'category')
+            ->findOrFail($request->id);
 
         $content = $article->getContent();
+
         $tags = Tag::all();
-        $categories = Category::all();
+
+        $categories = Category::with('articles')->get();
 
         return view('articles.show', compact(['article', 'tags', 'categories', 'content']));
     }

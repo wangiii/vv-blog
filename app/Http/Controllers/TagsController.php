@@ -10,7 +10,7 @@ class TagsController extends Controller
 {
     public function show(Request $request)
     {
-        $tag = Tag::where('id', $request->id)->firstOrFail();
+        $tag = Tag::findOrFail($request->id);
 
         $count = $tag->articles->count();
 
@@ -19,7 +19,8 @@ class TagsController extends Controller
             ->paginate(12);
 
         $tags = Tag::all();
-        $categories = Category::all();
+
+        $categories = Category::with('articles')->get();
 
         return view('tags.show', compact(['tag', 'articles', 'count', 'tags', 'categories']));
     }

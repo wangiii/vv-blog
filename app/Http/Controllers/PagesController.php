@@ -18,7 +18,8 @@ class PagesController extends Controller
             ->paginate(10);
 
         $tags = Tag::all();
-        $categories = Category::all();
+
+        $categories = Category::with('articles')->get();
 
         return view('pages/root', compact(['articles', 'tags', 'categories']));
     }

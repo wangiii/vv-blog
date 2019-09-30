@@ -10,7 +10,7 @@ class CategoriesController extends Controller
 {
     public function show(Request $request)
     {
-        $category = Category::where('id', $request->id)->firstOrFail();
+        $category = Category::findOrFail($request->id);
 
         $count = $category->articles->count();
 
@@ -18,7 +18,8 @@ class CategoriesController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        $categories = Category::all();
+        $categories = Category::with('articles')->get();
+
         $tags = Tag::all();
 
         return view('categories.show', compact(['category', 'articles', 'count', 'tags', 'categories']));

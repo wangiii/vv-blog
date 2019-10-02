@@ -12,8 +12,6 @@ class TagsController extends Controller
     {
         $tag = Tag::findOrFail($request->id);
 
-        $count = $tag->articles->count();
-
         $articles = $tag->articles()
             ->orderBy('created_at', 'desc')
             ->paginate(12);
@@ -22,6 +20,6 @@ class TagsController extends Controller
 
         $categories = Category::with('articles')->get();
 
-        return view('tags.show', compact(['tag', 'articles', 'count', 'tags', 'categories']));
+        return view('tags.show', compact(['tag', 'articles', 'tags', 'categories']));
     }
 }

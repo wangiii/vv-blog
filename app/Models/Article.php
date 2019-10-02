@@ -22,7 +22,7 @@ class Article extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function getContent()
+    public function getHtmlContentAttribute()
     {
         $parser = new Parsedown();
         $convert2Html = $parser->text($this->content);

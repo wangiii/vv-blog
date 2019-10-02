@@ -14,12 +14,10 @@ class ArticlesController extends Controller
         $article = Article::with('tags', 'category')
             ->findOrFail($request->id);
 
-        $content = $article->getContent();
-
         $tags = Tag::all();
 
         $categories = Category::with('articles')->get();
 
-        return view('articles.show', compact(['article', 'tags', 'categories', 'content']));
+        return view('articles.show', compact(['article', 'tags', 'categories']));
     }
 }

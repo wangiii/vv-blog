@@ -12,7 +12,7 @@ class PagesController extends Controller
     public function index(Request $request)
     {
         $articles = Article::query()
-            ->where('category_id', '!=', 3)
+            ->where('category_id', '!=', 3) // 过滤算法题
             ->with('tags', 'category')
             ->orderBy('created_at', 'desc')
             ->paginate(10);

@@ -17,7 +17,7 @@
                     <a href="{{ route('article', ['id' => $article->id]) }}" }} class="list-group-item list-group-item-action" style="color: darkgray">
                         {{ $article->title }}
                         <span class="float-lg-right" style="color: darkgray; display: inline-block">
-                            {{ $article->created_at->toDateString() }}
+                             / {{ $article->created_at->toDateString() }}
                         </span>
                     </a>
                 @empty

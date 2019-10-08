@@ -24,7 +24,7 @@ class TagsController extends Controller
 
         $articles = $tag->articles()
             ->orderBy('created_at', 'desc')
-            ->paginate(12);
+            ->paginate(20);
 
         $tags = $this->tagServices->get();
         $categories = $this->categoryServices->get();

@@ -3,19 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Services\CategoryServices;
-use App\Services\TagServices;
+use App\Transformers\ArticleTransformer;
 use Illuminate\Http\Request;
+use League\Fractal\Manager;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 
 class ArticlesController extends Controller
 {
-    protected $categoryServices;
-    protected $tagServices;
+    private $fractal;
+    private $articleTransformer;
 
-    public function __construct(CategoryServices $categoryServices, TagServices $tagServices)
+    public function __construct(Manager $fractal, ArticleTransformer $articleTransformer)
     {
-        $this->categoryServices = $categoryServices;
-        $this->tagServices = $tagServices;
+        $this->fractal = $fractal;
+        $this->articleTransformer = $articleTransformer;
+    }
+
+    public function index(Request $request)
+    {
+        $articlesPaginator = Article::query()
+            ->where('category_id', '!=', 3) // 过滤算法题
+            ->with('tags', 'category')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
+        $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));
+        $articles = $this->fractal->createData($articles);
+
+        return $articles->toArray();
     }
 
     public function show(Request $request)
@@ -23,9 +41,9 @@ class ArticlesController extends Controller
         $article = Article::with('tags', 'category')
             ->findOrFail($request->id);
 
-        $tags = $this->tagServices->get();
-        $categories = $this->categoryServices->get();
+        $article = new Item($article, $this->articleTransformer);
+        $article = $this->fractal->createData($article);
 
-        return view('articles.show', compact(['article', 'tags', 'categories']));
+        return $article->toArray();
     }
 }

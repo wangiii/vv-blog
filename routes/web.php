@@ -13,7 +13,6 @@
 
 //Auth::routes();
 
-Route::get('/', 'PagesController@index')->name('root');
-Route::get('/article/{id}', 'ArticlesController@show')->name('article');
-Route::get('/tag/{id}', 'TagsController@show')->name('tag');
-Route::get('/category/{id}', 'CategoriesController@show')->name('category');
+Route::any('{all}', function () {
+    return view('master');
+})->where(['all' => '.*']);

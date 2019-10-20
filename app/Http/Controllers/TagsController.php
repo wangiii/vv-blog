@@ -3,32 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use App\Services\CategoryServices;
-use App\Services\TagServices;
+use App\Transformers\ArticleTransformer;
+use App\Transformers\TagTransformer;
 use Illuminate\Http\Request;
+use League\Fractal\Manager;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Resource\Collection;
 
 class TagsController extends Controller
 {
-    protected $categoryServices;
-    protected $tagServices;
+    private $fractal;
+    private $articleTransformer;
+    private $tagTransformer;
 
-    public function __construct(CategoryServices $categoryServices, TagServices $tagServices)
+    public function __construct(Manager $fractal, ArticleTransformer $articleTransformer,TagTransformer $tagTransformer)
     {
-        $this->categoryServices = $categoryServices;
-        $this->tagServices = $tagServices;
+        $this->fractal = $fractal;
+        $this->articleTransformer = $articleTransformer;
+        $this->tagTransformer = $tagTransformer;
+    }
+
+    public function index()
+    {
+        $tags = Tag::withCount('articles')->get();
+
+        $tags = new Collection($tags, $this->tagTransformer);
+        $tags = $this->fractal->createData($tags);
+
+        return $tags->toArray();
     }
 
     public function show(Request $request)
     {
         $tag = Tag::findOrFail($request->id);
 
-        $articles = $tag->articles()
+        $articlesPaginator = $tag->articles()
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(3);
 
-        $tags = $this->tagServices->get();
-        $categories = $this->categoryServices->get();
+        $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
+        $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));
+        $articles = $this->fractal->createData($articles);
 
-        return view('tags.show', compact(['tag', 'articles', 'tags', 'categories']));
+        $articlesCount = $tag->articles()->count();
+
+        return [
+            'name' => $tag->name,
+            'count' => $articlesCount,
+            'articles' => $articles->toArray()
+        ];
     }
 }

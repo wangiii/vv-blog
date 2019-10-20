@@ -3,32 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Services\CategoryServices;
-use App\Services\TagServices;
+use App\Transformers\ArticleTransformer;
+use App\Transformers\CategoryTransformer;
 use Illuminate\Http\Request;
+use League\Fractal\Manager;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Resource\Collection;
 
 class CategoriesController extends Controller
 {
-    protected $categoryServices;
-    protected $tagServices;
+    private $fractal;
+    private $articleTransformer;
+    private $categoryTransformer;
 
-    public function __construct(CategoryServices $categoryServices, TagServices $tagServices)
+    public function __construct(Manager $fractal, ArticleTransformer $articleTransformer, CategoryTransformer $categoryTransformer)
     {
-        $this->categoryServices = $categoryServices;
-        $this->tagServices = $tagServices;
+        $this->fractal = $fractal;
+        $this->articleTransformer = $articleTransformer;
+        $this->categoryTransformer = $categoryTransformer;
+    }
+
+    public function index()
+    {
+        $categories = Category::withCount('articles')->get();
+
+        $categories = new Collection($categories, $this->categoryTransformer);
+        $categories = $this->fractal->createData($categories);
+
+        return $categories->toArray();
     }
 
     public function show(Request $request)
     {
         $category = Category::findOrFail($request->id);
 
-        $articles = $category->articles()
+        $articlesPaginator = $category->articles()
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(5);
 
-        $tags = $this->tagServices->get();
-        $categories = $this->categoryServices->get();
+        $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
+        $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));
+        $articles = $this->fractal->createData($articles);
 
-        return view('categories.show', compact(['category', 'articles', 'tags', 'categories']));
+        $articlesCount = $category->articles()->count();
+
+        return [
+            'name' => $category->name,
+            'count' => $articlesCount,
+            'articles' => $articles->toArray()
+        ];
     }
 }

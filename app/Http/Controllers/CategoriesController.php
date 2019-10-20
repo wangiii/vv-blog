@@ -39,7 +39,7 @@ class CategoriesController extends Controller
 
         $articlesPaginator = $category->articles()
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(20);
 
         $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
         $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));

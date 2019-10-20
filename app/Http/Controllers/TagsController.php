@@ -39,7 +39,7 @@ class TagsController extends Controller
 
         $articlesPaginator = $tag->articles()
             ->orderBy('created_at', 'desc')
-            ->paginate(3);
+            ->paginate(20);
 
         $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
         $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));

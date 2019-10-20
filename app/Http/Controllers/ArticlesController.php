@@ -27,7 +27,7 @@ class ArticlesController extends Controller
             ->where('category_id', '!=', 3) // 过滤算法题
             ->with('tags', 'category')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
         $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));

@@ -1,13 +1,16 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9 fixPadding">
-                <transition name="fade" mode="out-in">
-                    <router-view :key="key"></router-view>
-                </transition>
-            </div>
-            <div class="col-md-3">
-                <right-bar></right-bar>
+    <div>
+        <top-nav></top-nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 fixPadding">
+                    <transition name="fade" mode="out-in">
+                        <router-view :key="key"></router-view>
+                    </transition>
+                </div>
+                <div class="col-md-3">
+                    <right-bar></right-bar>
+                </div>
             </div>
         </div>
     </div>
@@ -15,9 +18,11 @@
 
 <script>
     import RightBar from "./RightBar"
+    import TopNav from "./TopNav"
     export default {
         components : {
-            RightBar
+            RightBar,
+            TopNav
         },
         computed:{
             key(){

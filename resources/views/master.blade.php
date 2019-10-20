@@ -12,7 +12,6 @@
 </head>
 <body>
 <div id="app">
-    @include('layouts._header')
     <app></app>
     @include('layouts._footer')
 </div>

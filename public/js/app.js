@@ -6839,7 +6839,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card[data-v-f2b6376c] {\n    margin-bottom: 10px;\n}\n.tags[data-v-f2b6376c] {\n    display:inline;\n}\n.tag-span[data-v-f2b6376c] {\n    display:inline;\n    margin-right: 5px;\n}\n.card-title a[data-v-f2b6376c] {\n    color: darkgray;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-f2b6376c] {\n    margin-bottom: 10px;\n}\n.tags[data-v-f2b6376c] {\n    display:inline;\n}\n.tag-span[data-v-f2b6376c] {\n    display:inline;\n    margin-right: 5px;\n}\n.card-title a[data-v-f2b6376c] {\n    color: darkgray;\n}\n.card-body[data-v-f2b6376c] {\n    padding: 10px 20px 10px 20px ;\n}\n", ""]);
 
 // exports
 
@@ -39068,7 +39068,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("p", { staticStyle: { color: "#7e7e7e" } }, [
+                _c("p", { staticStyle: { color: "#7e7e7e", margin: "0" } }, [
                   _vm._v(
                     "\n                " +
                       _vm._s(article.describe) +

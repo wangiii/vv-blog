@@ -18,7 +18,7 @@
                         <span class="float-lg-right" style="color: darkgray; display: inline-block">&nbsp;&nbsp;{{ article.created_at }}</span>
                     </div>
                 </div>
-                <p style="color: #7e7e7e; margin: 0">
+                <p style="color: #7e7e7e;">
                     {{ article.describe }}
                 </p>
             </div>
@@ -98,8 +98,5 @@
     }
     .card-title a {
         color: darkgray;
-    }
-    .card-body {
-        padding: 10px 20px 10px 20px ;
     }
 </style>

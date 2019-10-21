@@ -53,7 +53,7 @@
             return {
                 id : null,
                 category_name : null,
-                articles : null,
+                articles : [],
                 total_pages : null,
                 articles_count : null,
                 current_page : 1,

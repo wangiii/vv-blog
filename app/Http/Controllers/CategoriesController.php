@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Transformers\ArticleTransformer;
+use App\Transformers\ArticleTitleAndTimeTransformer;
 use App\Transformers\CategoryTransformer;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
@@ -13,13 +13,13 @@ use League\Fractal\Resource\Collection;
 class CategoriesController extends Controller
 {
     private $fractal;
-    private $articleTransformer;
+    private $articleTitleAndTimeTransformer;
     private $categoryTransformer;
 
-    public function __construct(Manager $fractal, ArticleTransformer $articleTransformer, CategoryTransformer $categoryTransformer)
+    public function __construct(Manager $fractal, ArticleTitleAndTimeTransformer $articleTitleAndTimeTransformer, CategoryTransformer $categoryTransformer)
     {
         $this->fractal = $fractal;
-        $this->articleTransformer = $articleTransformer;
+        $this->articleTitleAndTimeTransformer = $articleTitleAndTimeTransformer;
         $this->categoryTransformer = $categoryTransformer;
     }
 
@@ -41,7 +41,7 @@ class CategoriesController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
+        $articles = new Collection($articlesPaginator->items(), $this->articleTitleAndTimeTransformer);
         $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));
         $articles = $this->fractal->createData($articles);
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use App\Transformers\ArticleTransformer;
+use App\Transformers\ArticleTitleAndTimeTransformer;
 use App\Transformers\TagTransformer;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
@@ -13,13 +13,13 @@ use League\Fractal\Resource\Collection;
 class TagsController extends Controller
 {
     private $fractal;
-    private $articleTransformer;
+    private $articleTitleAndTimeTransformer;
     private $tagTransformer;
 
-    public function __construct(Manager $fractal, ArticleTransformer $articleTransformer,TagTransformer $tagTransformer)
+    public function __construct(Manager $fractal, ArticleTitleAndTimeTransformer $articleTitleAndTimeTransformer,TagTransformer $tagTransformer)
     {
         $this->fractal = $fractal;
-        $this->articleTransformer = $articleTransformer;
+        $this->articleTitleAndTimeTransformer = $articleTitleAndTimeTransformer;
         $this->tagTransformer = $tagTransformer;
     }
 
@@ -41,7 +41,7 @@ class TagsController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        $articles = new Collection($articlesPaginator->items(), $this->articleTransformer);
+        $articles = new Collection($articlesPaginator->items(), $this->articleTitleAndTimeTransformer);
         $articles->setPaginator(new IlluminatePaginatorAdapter($articlesPaginator));
         $articles = $this->fractal->createData($articles);
 

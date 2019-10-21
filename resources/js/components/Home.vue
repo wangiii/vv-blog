@@ -23,7 +23,7 @@
                 </p>
             </div>
         </div>
-        <ul class="pagination" @click="toTop">
+        <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" v-on:click="prevPage">‹</a>
             </li>
@@ -66,6 +66,7 @@
                     this.articles = response.data.data
                     this.last_page = response.data.meta.pagination.total_pages
                 })
+                this.toTop()
             },
             nextPage : function () {
                 if(this.current_page !== this.last_page) {

@@ -23,7 +23,7 @@
                 </p>
             </div>
         </div>
-        <ul class="pagination">
+        <ul class="pagination" @click="toTop">
             <li class="page-item">
                 <a class="page-link" v-on:click="prevPage">‹</a>
             </li>
@@ -80,6 +80,13 @@
             goPage : function (page) {
                 this.current_page = page
                 this.getArticles(page)
+            },
+            toTop(){
+                if(document.body.scrollTop){
+                    document.body.scrollTop = 0
+                }else {
+                    document.documentElement.scrollTop = 0
+                }
             },
         }
     }

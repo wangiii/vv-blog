@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="pagination" v-if="articles && total_pages > 1">
+            <ul class="pagination" v-if="articles && total_pages > 1" @click="toTop">
                 <li class="page-item">
                     <a class="page-link" v-on:click="prevPage">‹</a>
                 </li>
@@ -83,6 +83,13 @@
             goPage : function (id, page) {
                 this.current_page = page
                 this.getCategory(id, page)
+            },
+            toTop(){
+                if(document.body.scrollTop){
+                    document.body.scrollTop = 0
+                }else {
+                    document.documentElement.scrollTop = 0
+                }
             },
         }
     }
